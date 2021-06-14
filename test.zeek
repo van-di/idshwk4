@@ -15,7 +15,8 @@ event zeek_init()
     local r404 = SumStats::Reducer($stream="response404", $apply=set(SumStats::SUM));
     local rUnique404 = SumStats::Reducer($stream="responseUnique404", $apply=set(SumStats::UNIQUE));
 
-    SumStats::create([$name="idshwk4", $epoch=10min, $reducers=set(rAll, r404, rUnique404), $epoch_result(ts: time, key: SumStats::Key, result: SumStats::Result) = {
+    SumStats::create([$name="idshwk4", $epoch=10min, $reducers=set(rAll, r404, rUnique404),
+    $epoch_result(ts: time, key: SumStats::Key, result: SumStats::Result) = {
         local r1 = result["response"];
         local r2 = result["response404"];
         local r3 = result["responseUnique404"];
